@@ -1,5 +1,9 @@
 # How to Exclude/Include multiple files or multiple folders from source branch to destination branch moving the required data
 
+follow the links 
+
+https://clubmate.fi/git-checkout-file-or-directories-from-another-branch/
+
 Note: First you get empty project git then follow the instructions to copy some files or folders to copy from old git project to new empty git project
 
 # Use Case
