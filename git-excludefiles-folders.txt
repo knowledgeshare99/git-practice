@@ -1,0 +1,405 @@
+# How to Exclude/Include multiple files or multiple folders from source branch to destination branch moving the required data
+
+Note: First you get empty project git then follow the instructions to copy some files or folders to copy from old git project to new empty git project
+
+# Use Case
+You want to create a new branch (e.g. a release branch) without a specific file or folder (because this might be not ready for a release) which already exists in the base branch.
+
+1)First clone a empty project
+INDC02WXXGHGDUG8GH:classrepos KSCLASS$ git clone https://github.com/knowledgeshare99/git-practice.git
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$ git branch
+* master
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$ pwd
+/Users/KSCLASS/repos/classrepos/git-practice
+
+Then create a new branch called "release"
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$ git branch release
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$ git branch
+* master
+  release
+
+2)
+change directory to old/existing repo of any of the projects which is having lot of files and folders
+INDC02WXXGHGDUG8GH:classrepos KSCLASS$cd staticwebsite/
+INDC02WXXGHGDUG8GH:staticwebsite KSCLASS$ls -rlt
+total 72
+drwxr-xr-x   5 KSCLASS  18833562132390    160 Jan  9  2019 css
+drwxr-xr-x   6 KSCLASS  18833562132390    192 Jan  9  2019 font
+drwxr-xr-x  18 KSCLASS  18833562132390    576 Jan  9  2019 img
+-rwxr-xr-x   1 KSCLASS  18833562132390  21658 Jan  9  2019 index.html
+-rwxr-xr-x   1 KSCLASS  18833562132390     62 Jan  9  2019 index.html-old
+drwxr-xr-x   7 KSCLASS  18833562132390    224 Jan  9  2019 js
+drwxr-xr-x   8 KSCLASS  18833562132390    256 Jan  9  2019 owl-carousel
+-rw-r--r--   1 KSCLASS  18833562132390    165 Feb 17  2019 README.md
+-rw-r--r--   1 KSCLASS  18833562132390      0 Aug 18 12:31 my.patch
+-rw-r--r--   1 KSCLASS  18833562132390     41 Aug 18 12:36 file1.txt
+
+
+INDC02WXXGHGDUG8GH:staticwebsite KSCLASS$cp -r js ../git-practice/
+INDC02WXXGHGDUG8GH:staticwebsite KSCLASS$cp -r img ../git-practice/
+
+3)Cd to new empty git repo
+INDC02WXXGHGDUG8GH:staticwebsite KSCLASS$cd ../git-practice/
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$ls -rlt
+total 16
+-rw-r--r--   1 KSCLASS  18833562132390   47 Aug 18 12:37 README.md
+-rw-r--r--   1 KSCLASS  18833562132390   48 Aug 18 12:45 no-cpy.txt
+drwxr-xr-x   7 KSCLASS  18833562132390  224 Aug 19 14:57 js
+drwxr-xr-x  18 KSCLASS  18833562132390  576 Aug 19 14:57 img
+
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$pwd
+/Users/KSCLASS/repos/classrepos/git-practice
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	img/
+	js/
+	no-cpy.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+4)Just only add one folder and left remaing folders/files
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git add img
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   img/about.jpg
+	new file:   img/client1.jpg
+	new file:   img/client2.jpg
+	new file:   img/client3.jpg
+	new file:   img/contact.jpg
+	new file:   img/first.jpg
+	new file:   img/por1.jpg
+	new file:   img/por2.jpg
+	new file:   img/por3.jpg
+	new file:   img/por4.jpg
+	new file:   img/por5.jpg
+	new file:   img/por6.jpg
+	new file:   img/por7.jpg
+	new file:   img/pricing.jpg
+	new file:   img/second.jpg
+	new file:   img/third.jpg
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	js/
+	no-cpy.txt
+
+Then do commit for the added folder on branch master
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git commit -m "just adding 1-commit for img"
+[master 1d705bb] just adding 1-commit for js
+ 16 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100755 img/about.jpg
+ create mode 100755 img/client1.jpg
+ create mode 100755 img/client2.jpg
+ create mode 100755 img/client3.jpg
+ create mode 100755 img/contact.jpg
+ create mode 100755 img/first.jpg
+ create mode 100755 img/por1.jpg
+ create mode 100755 img/por2.jpg
+ create mode 100755 img/por3.jpg
+ create mode 100755 img/por4.jpg
+ create mode 100755 img/por5.jpg
+ create mode 100755 img/por6.jpg
+ create mode 100755 img/por7.jpg
+ create mode 100755 img/pricing.jpg
+ create mode 100755 img/second.jpg
+ create mode 100755 img/third.jpg
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	js/
+	no-cpy.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git branch
+* master
+  release
+  wip
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git log
+commit 1d705bb9a750303fdbce9946ebe6e252abb38d47 (HEAD -> master)
+Author: KSGroup  <KSCLASS@INDC02WXXGHGDUG8GH.ksclass.com>
+Date:   Mon Aug 19 14:58:46 2019 +0530
+
+    just adding 1-commit for img
+
+commit 42fded74248e09ef22c5d3bed9d0b3f640d2f836 (origin/master, origin/HEAD, release)
+Author: knowledgeshare99 <knowledgeshare99@gmail.com>
+Date:   Sun Aug 18 12:37:16 2019 +0530
+
+    Initial commit
+
+5)Then do a checkout with latest commit ID from master
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$ git checkout 1d705bb9a750303fdbce9946ebe6e252abb38d47
+Note: checking out '1d705bb9a750303fdbce9946ebe6e252abb38d47'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+HEAD is now at 1d705bb just adding 1-commit for js
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git checkout 1d705bb9a750303fdbce9946ebe6e252abb38d47
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$ls -rlt
+total 16
+-rw-r--r--   1 KSCLASS  18833562132390   47 Aug 18 12:37 README.md
+-rw-r--r--   1 KSCLASS  18833562132390   48 Aug 18 12:45 no-cpy.txt
+drwxr-xr-x   7 KSCLASS  18833562132390  224 Aug 19 14:57 js
+drwxr-xr-x  18 KSCLASS  18833562132390  576 Aug 19 14:57 img
+
+
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git checkout 1d705bb9a750303fdbce9946ebe6e252abb38d47
+HEAD is now at 1d705bb just adding 1-commit for img
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git branch
+* (HEAD detached at 1d705bb)
+  master
+  release
+  wip
+
+Note:Now your HEAD should be detached and point to the specific commit. The next step is to create a branch, based on this commit with:
+6)Then create a new branch called "second_branch" then checkout from master
+
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git checkout -b second_branch
+Switched to a new branch 'second_branch'
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git branch
+  master
+  release
+* second_branch
+  wip
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git log
+commit 1d705bb9a750303fdbce9946ebe6e252abb38d47 (HEAD -> second_branch, master)
+Author: KSGroup  <KSCLASS@INDC02WXXGHGDUG8GH.ksclass.com>
+Date:   Mon Aug 19 14:58:46 2019 +0530
+
+    just adding 1-commit for img
+
+commit 42fded74248e09ef22c5d3bed9d0b3f640d2f836 (origin/master, origin/HEAD, release)
+Author: knowledgeshare99 <knowledgeshare99@gmail.com>
+Date:   Sun Aug 18 12:37:16 2019 +0530
+
+    Initial commit
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$ls -rlt
+total 16
+-rw-r--r--   1 KSCLASS  18833562132390   47 Aug 18 12:37 README.md
+-rw-r--r--   1 KSCLASS  18833562132390   48 Aug 18 12:45 no-cpy.txt
+drwxr-xr-x   7 KSCLASS  18833562132390  224 Aug 19 14:57 js
+drwxr-xr-x  18 KSCLASS  18833562132390  576 Aug 19 14:57 img
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git status
+On branch second_branch
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	js/
+	no-cpy.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+7)Let's start with merging the branch:Now you please checkout from second_branch to "release" branch which does't have latest files/folders with commits ids.
+
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git branch
+  master
+  release
+* second_branch
+  wip
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git checkout release
+
+Note:
+--no-commit and --no-ff are flags for git that with your merge you don't want to perform an automated commit and fast-forward the changes. As a result you get with git status the status of your branch with a lot of modified or added files. now we want to exclude the files we don't like:
+
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git checkout release
+Switched to branch 'release'
+
+Note:Here you're just adding files/folders not auto commited from master to release branch so after adding then you choice that what files/folders delete and keep adding to this
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git status
+On branch release
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	js/
+	no-cpy.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git merge --no-commit --no-ff master
+Automatic merge went well; stopped before committing as requested
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git status
+On branch release
+All conflicts fixed but you are still merging.
+  (use "git commit" to conclude merge)
+
+Changes to be committed:
+
+	new file:   img/about.jpg
+	new file:   img/client1.jpg
+	new file:   img/client2.jpg
+	new file:   img/client3.jpg
+	new file:   img/contact.jpg
+	new file:   img/first.jpg
+	new file:   img/por1.jpg
+	new file:   img/por2.jpg
+	new file:   img/por3.jpg
+	new file:   img/por4.jpg
+	new file:   img/por5.jpg
+	new file:   img/por6.jpg
+	new file:   img/por7.jpg
+	new file:   img/pricing.jpg
+	new file:   img/second.jpg
+	new file:   img/third.jpg
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	js/
+	no-cpy.txt
+
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git log
+commit 42fded74248e09ef22c5d3bed9d0b3f640d2f836 (HEAD -> release, origin/master, origin/HEAD)
+Author: knowledgeshare99 <knowledgeshare99@gmail.com>
+Date:   Sun Aug 18 12:37:16 2019 +0530
+
+    Initial commit
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git reset HEAD -- img/third.jpg
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git log
+commit 42fded74248e09ef22c5d3bed9d0b3f640d2f836 (HEAD -> release, origin/master, origin/HEAD)
+Author: knowledgeshare99 <knowledgeshare99@gmail.com>
+Date:   Sun Aug 18 12:37:16 2019 +0530
+
+    Initial commit
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git status
+On branch release
+All conflicts fixed but you are still merging.
+  (use "git commit" to conclude merge)
+
+Changes to be committed:
+
+	new file:   img/about.jpg
+	new file:   img/client1.jpg
+	new file:   img/client2.jpg
+	new file:   img/client3.jpg
+	new file:   img/contact.jpg
+	new file:   img/first.jpg
+	new file:   img/por1.jpg
+	new file:   img/por2.jpg
+	new file:   img/por3.jpg
+	new file:   img/por4.jpg
+	new file:   img/por5.jpg
+	new file:   img/por6.jpg
+	new file:   img/por7.jpg
+	new file:   img/pricing.jpg
+	new file:   img/second.jpg
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	img/third.jpg
+	js/
+	no-cpy.txt
+
+8)
+this will reset your file you do not want to the actual HEAD used in this branch, which is the commit bevor the file/folder was added. After that you can clean your git repository with:
+
+Syntax:
+KSCLASS$ git reset HEAD -- <path/to/yourfile> <path/to/yourfolders> <...etc,...>
+
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git reset HEAD -- img/third.jpg img/por5.jpg
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git status
+On branch release
+All conflicts fixed but you are still merging.
+  (use "git commit" to conclude merge)
+
+Changes to be committed:
+
+	new file:   img/about.jpg
+	new file:   img/client1.jpg
+	new file:   img/client2.jpg
+	new file:   img/client3.jpg
+	new file:   img/contact.jpg
+	new file:   img/first.jpg
+	new file:   img/por1.jpg
+	new file:   img/por2.jpg
+	new file:   img/por3.jpg
+	new file:   img/por4.jpg
+	new file:   img/por6.jpg
+	new file:   img/por7.jpg
+	new file:   img/pricing.jpg
+	new file:   img/second.jpg
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	img/por5.jpg
+	img/third.jpg
+	js/
+	no-cpy.txt
+
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git reset HEAD -- img/third.jpg img/por5.jpg
+
+9)
+#git clean -fd  (which will clean your repo and delete the files you don't want)
+
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git clean -fd
+Removing img/por5.jpg
+Removing img/third.jpg
+Removing js/
+Removing no-cpy.txt
+
+Now check the git status of release branch .So,you can see that there are not untracked files
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git status
+On branch release
+All conflicts fixed but you are still merging.
+  (use "git commit" to conclude merge)
+
+Changes to be committed:
+
+	new file:   img/about.jpg
+	new file:   img/client1.jpg
+	new file:   img/client2.jpg
+	new file:   img/client3.jpg
+	new file:   img/contact.jpg
+	new file:   img/first.jpg
+	new file:   img/por1.jpg
+	new file:   img/por2.jpg
+	new file:   img/por3.jpg
+	new file:   img/por4.jpg
+	new file:   img/por6.jpg
+	new file:   img/por7.jpg
+	new file:   img/pricing.jpg
+	new file:   img/second.jpg
+
+9)
+The last step is to commit the changes with:
+Syntax:
+git commit -m "your message"
+
+
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git commit -m "removed/cleanup unwanted files and folders of destination branch,and merged the wanted files and folders into release branch"
+[release b83749d] removed/cleanup unwanted files and folders of destination branch,and merged the wanted files and folders into release branch
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git status
+On branch release
+nothing to commit, working tree clean
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$git branch
+  master
+* release
+  second_branch
+  wip
+INDC02WXXGHGDUG8GH:git-practice KSCLASS$
+
+Finally, you are done. Now you got a new branch based on another branch, but without the specific files or folder you didn't want to include
